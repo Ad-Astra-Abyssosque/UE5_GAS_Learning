@@ -1,0 +1,26 @@
+# Unreal Engine
+Binaries/
+DerivedDataCache/
+Intermediate/
+Saved/
+
+# Unreal generated project/user files
+*.VC.db
+*.VC.opendb
+*.sln
+*.suo
+*.opensdf
+*.sdf
+
+# Rider / JetBrains
+.idea/
+
+# Visual Studio
+.vs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Optional: ignore a specific content folder
+Content/Assets/
