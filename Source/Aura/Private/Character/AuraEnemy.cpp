@@ -43,3 +43,11 @@ void AAuraEnemy::OnHoverEnd()
 		Weapon->SetCustomDepthStencilValue(0);
 	}
 }
+
+void AAuraEnemy::BeginPlay()
+{
+	Super::BeginPlay();
+	
+	// For AI-Controlled Character: do this in BeginPlay
+	AbilitySystemComponent->InitAbilityActorInfo(this, this);
+}
