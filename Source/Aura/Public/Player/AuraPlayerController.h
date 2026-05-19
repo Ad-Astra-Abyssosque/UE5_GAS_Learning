@@ -40,7 +40,7 @@ private:
 	UPROPERTY(EditAnywhere, Category = "Input")
 	TObjectPtr<UInputAction> MoveAction;
 	
-	IHoverable* LastActor;
-	IHoverable* CurrentActor;
+	TObjectPtr<IHoverable> LastActor;
+	TObjectPtr<IHoverable> CurrentActor;
 	
 };

@@ -7,7 +7,10 @@
 #include "Camera/CameraComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "Player/AuraPlayerController.h"
 #include "Player/AuraPlayerState.h"
+#include "UI/HUD/AuraHUD.h"
+#include "UI/WidgetController/AuraWidgetController.h"
 
 AAuraCharacter::AAuraCharacter()
 {
@@ -36,6 +39,8 @@ void AAuraCharacter::PossessedBy(AController* NewController)
 	
 	// Init Ability Info for SERVER
 	InitAbilityActorInfo();
+	
+	InitHUDOverlay();
 }
 
 void AAuraCharacter::OnRep_PlayerState()
@@ -44,14 +49,29 @@ void AAuraCharacter::OnRep_PlayerState()
 	
 	// Init Ability Info for CLIENT
 	InitAbilityActorInfo();
+	
+	InitHUDOverlay();
 }
 
 void AAuraCharacter::InitAbilityActorInfo()
 {
-	if (AAuraPlayerState* AuraPlayerState = GetPlayerState<AAuraPlayerState>())
+	AAuraPlayerState* AuraPlayerState = GetPlayerState<AAuraPlayerState>();
+	check(AuraPlayerState);
+	AuraPlayerState->GetAbilitySystemComponent()->InitAbilityActorInfo(AuraPlayerState, this);
+	AbilitySystemComponent = AuraPlayerState->GetAbilitySystemComponent();
+	AttributeSet = AuraPlayerState->GetAttributeSet();
+}
+
+void AAuraCharacter::InitHUDOverlay()
+{
+	AAuraPlayerState* AuraPlayerState = GetPlayerState<AAuraPlayerState>();
+	check(AuraPlayerState);
+	if (AAuraPlayerController* AuraPlayerController = Cast<AAuraPlayerController>(AuraPlayerState->GetPlayerController()))
 	{
-		AuraPlayerState->GetAbilitySystemComponent()->InitAbilityActorInfo(AuraPlayerState, this);
-		AbilitySystemComponent = AuraPlayerState->GetAbilitySystemComponent();
-		AttributeSet = AuraPlayerState->GetAttributeSet();
+		if (AAuraHUD* AuraHUD = Cast<AAuraHUD>(AuraPlayerState->GetPlayerController()->GetHUD()))
+		{
+			FWidgetControllerParams Params(AuraPlayerState, AuraPlayerController, AbilitySystemComponent, AttributeSet);
+			AuraHUD->InitOverlay(Params);
+		}
 	}
 }

@@ -34,4 +34,6 @@ protected:
 private:
 	void InitAbilityActorInfo();
 	
+	void InitHUDOverlay();
+	
 };
