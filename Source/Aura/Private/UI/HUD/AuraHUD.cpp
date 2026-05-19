@@ -23,7 +23,9 @@ void AAuraHUD::InitOverlay(const FWidgetControllerParams& Params)
 	OverlayWidget = CreateWidget<UAuraUserWidget>(GetWorld(), OverlayWidgetClass);
 	
 	// 初始化Overlay Controller
+	// 同时设置子控件的Controller，并完成子控件的委托绑定
 	OverlayWidget->SetWidgetController(GetOverlayWidgetController(Params));
+	OverlayWidgetController->BroadcastInitialValues();
 	
 	OverlayWidget->AddToViewport();
 }
