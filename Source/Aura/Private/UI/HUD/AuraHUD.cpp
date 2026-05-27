@@ -11,6 +11,8 @@ UOverlayWidgetController* AAuraHUD::GetOverlayWidgetController(const FWidgetCont
 	{
 		OverlayWidgetController = NewObject<UOverlayWidgetController>(this, OverlayWidgetControllerClass);
 		OverlayWidgetController->SetWidgetControllerParams(Params);
+		// 绑定ACS的委托，监听来自model的变化
+		OverlayWidgetController->BindCallBackToDependencies();
 	}
 	return OverlayWidgetController;
 }
@@ -25,6 +27,8 @@ void AAuraHUD::InitOverlay(const FWidgetControllerParams& Params)
 	// 初始化Overlay Controller
 	// 同时设置子控件的Controller，并完成子控件的委托绑定
 	OverlayWidget->SetWidgetController(GetOverlayWidgetController(Params));
+	
+	// 向子控件广播初始值
 	OverlayWidgetController->BroadcastInitialValues();
 	
 	OverlayWidget->AddToViewport();

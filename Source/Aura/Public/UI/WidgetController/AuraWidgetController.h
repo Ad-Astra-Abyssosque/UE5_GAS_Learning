@@ -46,6 +46,8 @@ public:
 	
 	virtual void BroadcastInitialValues();
 	
+	virtual void BindCallBackToDependencies();
+	
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = "WidgetController")
 	TObjectPtr<APlayerState> PlayerState;
