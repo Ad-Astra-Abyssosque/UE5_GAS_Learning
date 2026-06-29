@@ -49,5 +49,13 @@ void AAuraEnemy::BeginPlay()
 	Super::BeginPlay();
 	
 	// For AI-Controlled Character: do this in BeginPlay
+	InitAbilityActorInfo();
+}
+
+void AAuraEnemy::InitAbilityActorInfo()
+{
+	Super::InitAbilityActorInfo();
+	
 	AbilitySystemComponent->InitAbilityActorInfo(this, this);
+	Cast<UAuraAbilitySystemComponent>(AbilitySystemComponent)->OnAbilityActorInfoSet();
 }
