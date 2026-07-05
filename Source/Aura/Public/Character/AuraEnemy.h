@@ -23,8 +23,9 @@ public:
 	virtual void OnHoverEnd() override;
 	//~ End IHoverable Interface
 	
-protected:
 	virtual void BeginPlay() override;
+	
+protected:
 	
 	virtual void InitAbilityActorInfo() override;
 };

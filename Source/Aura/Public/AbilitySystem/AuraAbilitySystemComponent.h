@@ -6,6 +6,8 @@
 #include "AbilitySystemComponent.h"
 #include "AuraAbilitySystemComponent.generated.h"
 
+DECLARE_MULTICAST_DELEGATE_OneParam(FBroadcastAssetTagsDelegate, const FGameplayTagContainer& /*Asset Tags*/)
+
 /**
  * 
  */
@@ -18,4 +20,7 @@ public:
 	void OnAbilityActorInfoSet();
 	
 	void OnEffectApplied(UAbilitySystemComponent* AbilitySystemComponent, const FGameplayEffectSpec& EffectSpec, FActiveGameplayEffectHandle ActiveEffectHandle);
+
+	// OnEffectApplied 回调中，广播给 Widget Controller
+	FBroadcastAssetTagsDelegate BroadcastAssetTagsDelegate;
 };

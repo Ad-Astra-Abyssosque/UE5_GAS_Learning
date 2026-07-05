@@ -25,6 +25,8 @@ public:
 	virtual void OnRep_PlayerState() override;
 	
 protected:
+	virtual void InitAbilityActorInfo() override;
+	
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UCameraComponent> CameraComponent;
 	
@@ -32,7 +34,6 @@ protected:
 	TObjectPtr<USpringArmComponent> SpringArmComponent;
 	
 private:
-	virtual void InitAbilityActorInfo() override;
 	
 	void InitHUDOverlay();
 	

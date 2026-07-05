@@ -22,11 +22,11 @@ public:
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override { return AbilitySystemComponent; }
 	
 	UAttributeSet* GetAttributeSet() const { return AttributeSet; }
-
-protected:
+	
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 	
+protected:
 	virtual void InitAbilityActorInfo();
 
 	UPROPERTY(EditAnywhere, Category = "Combat")
